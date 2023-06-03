@@ -13,7 +13,6 @@ import android.view.WindowManager;
 
 import com.cgfay.cameralibrary.R;
 import com.cgfay.camera.fragment.CameraPreviewFragment;
-import com.cgfay.facedetect.engine.FaceTracker;
 import com.cgfay.uitls.utils.NotchUtils;
 
 /**
@@ -35,14 +34,6 @@ public class CameraActivity extends AppCompatActivity {
                     .replace(R.id.fragment_container, mPreviewFragment, FRAGMENT_CAMERA)
                     .commit();
         }
-        faceTrackerRequestNetwork();
-    }
-
-    /**
-     * 人脸检测SDK验证，可以替换成自己的SDK
-     */
-    private void faceTrackerRequestNetwork() {
-        new Thread(() -> FaceTracker.requestFaceNetwork(CameraActivity.this)).start();
     }
 
     @Override

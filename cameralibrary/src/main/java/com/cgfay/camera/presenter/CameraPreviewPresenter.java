@@ -14,7 +14,6 @@ import android.util.Log;
 import com.cgfay.camera.activity.CameraSettingActivity;
 import com.cgfay.camera.camera.CameraController;
 import com.cgfay.camera.camera.CameraParam;
-import com.cgfay.camera.camera.CameraXController;
 import com.cgfay.camera.camera.ICameraController;
 import com.cgfay.camera.camera.OnFrameAvailableListener;
 import com.cgfay.camera.camera.OnSurfaceTextureListener;
@@ -25,8 +24,6 @@ import com.cgfay.camera.fragment.CameraPreviewFragment;
 import com.cgfay.camera.listener.OnPreviewCaptureListener;
 import com.cgfay.camera.render.CameraRenderer;
 import com.cgfay.camera.utils.PathConstraints;
-import com.cgfay.facedetect.engine.FaceTracker;
-import com.cgfay.facedetect.listener.FaceTrackerCallback;
 import com.cgfay.filter.glfilter.color.bean.DynamicColor;
 import com.cgfay.filter.glfilter.makeup.bean.DynamicMakeup;
 import com.cgfay.filter.glfilter.resource.FilterHelper;
@@ -51,7 +48,6 @@ import com.cgfay.uitls.utils.FileUtils;
 import com.cgfay.video.activity.VideoEditActivity;
 
 import java.io.File;
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +57,7 @@ import java.util.List;
  * @date 2019/7/3
  */
 public class CameraPreviewPresenter extends PreviewPresenter<CameraPreviewFragment>
-        implements PreviewCallback, FaceTrackerCallback, OnCaptureListener, OnFpsListener,
+        implements PreviewCallback, OnCaptureListener, OnFpsListener,
         OnSurfaceTextureListener, OnFrameAvailableListener, OnRecordStateListener {
 
     private static final String TAG = "CameraPreviewPresenter";
@@ -147,12 +143,6 @@ public class CameraPreviewPresenter extends PreviewPresenter<CameraPreviewFragme
         } else {
             mCameraParam.brightness = BrightnessUtils.getSystemBrightness(mActivity);
         }
-
-        // 初始化检测器
-        FaceTracker.getInstance()
-                .setFaceCallback(this)
-                .previewTrack(true)
-                .initTracker();
     }
 
     @Override
@@ -185,8 +175,6 @@ public class CameraPreviewPresenter extends PreviewPresenter<CameraPreviewFragme
     @Override
     public void onDestroy() {
         super.onDestroy();
-        // 销毁人脸检测器
-        FaceTracker.getInstance().destroyTracker();
         // 清理关键点
         LandmarkEngine.getInstance().clearAll();
         if (mHWMediaRecorder != null) {
@@ -487,12 +475,6 @@ public class CameraPreviewPresenter extends PreviewPresenter<CameraPreviewFragme
                 "orientation - " + mCameraController.getOrientation()
                 + "width - " + mCameraController.getPreviewWidth()
                 + ", height - " + mCameraController.getPreviewHeight());
-        FaceTracker.getInstance()
-                .setBackCamera(!mCameraController.isFront())
-                .prepareFaceTracker(mActivity,
-                        mCameraController.getOrientation(),
-                        mCameraController.getPreviewWidth(),
-                        mCameraController.getPreviewHeight());
     }
 
     // ------------------------- Camera 输出SurfaceTexture准备完成回调 -------------------------------
@@ -507,16 +489,6 @@ public class CameraPreviewPresenter extends PreviewPresenter<CameraPreviewFragme
     public void onPreviewFrame(byte[] data) {
         Log.d(TAG, "onPreviewFrame: width - " + mCameraController.getPreviewWidth()
                 + ", height - " + mCameraController.getPreviewHeight());
-        FaceTracker.getInstance()
-                .trackFace(data, mCameraController.getPreviewWidth(),
-                        mCameraController.getPreviewHeight());
-    }
-
-    // ---------------------------------- 人脸检测完成回调 ------------------------------------------
-    @Override
-    public void onTrackingFinish() {
-        Log.d(TAG, "onTrackingFinish: ");
-        mCameraRenderer.requestRender();
     }
 
     // ------------------------------ SurfaceTexture帧可用回调 --------------------------------------

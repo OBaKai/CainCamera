@@ -21,12 +21,6 @@ android {
         }
     }
 
-    repositories {
-        flatDir {
-            // 人脸关键点检测依赖库下放到facedetectlibrary
-            dirs project(':facedetectlibrary').file('libs')
-        }
-    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -38,7 +32,6 @@ def lifecycle_version = '2.2.0'
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation project(':facedetectlibrary')
     implementation project(':filterlibrary')
     implementation project(':gdxlibrary')
     implementation project(':imagelibrary')
