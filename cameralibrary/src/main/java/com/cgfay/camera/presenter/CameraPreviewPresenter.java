@@ -489,6 +489,7 @@ public class CameraPreviewPresenter extends PreviewPresenter<CameraPreviewFragme
     public void onPreviewFrame(byte[] data) {
         Log.d(TAG, "onPreviewFrame: width - " + mCameraController.getPreviewWidth()
                 + ", height - " + mCameraController.getPreviewHeight());
+        mCameraRenderer.requestRender();
     }
 
     // ------------------------------ SurfaceTexture帧可用回调 --------------------------------------
