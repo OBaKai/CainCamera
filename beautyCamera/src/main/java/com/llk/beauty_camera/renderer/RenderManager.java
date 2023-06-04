@@ -3,14 +3,10 @@ package com.llk.beauty_camera.renderer;
 import android.content.Context;
 import android.util.SparseArray;
 
-import com.cgfay.filter.glfilter.base.GLImageDepthBlurFilter;
 import com.cgfay.filter.glfilter.base.GLImageFilter;
 import com.cgfay.filter.glfilter.base.GLImageOESInputFilter;
-import com.cgfay.filter.glfilter.base.GLImageVignetteFilter;
 import com.cgfay.filter.glfilter.beauty.GLImageBeautyFilter;
 import com.cgfay.filter.glfilter.beauty.bean.IBeautify;
-import com.cgfay.filter.glfilter.face.GLImageFaceReshapeFilter;
-import com.cgfay.filter.glfilter.makeup.GLImageMakeupFilter;
 import com.cgfay.filter.glfilter.utils.OpenGLUtils;
 import com.cgfay.filter.glfilter.utils.TextureRotationUtils;
 import com.llk.beauty_camera.camera.CameraParam;
@@ -120,24 +116,8 @@ public final class RenderManager {
         mFilterArrays.put(RenderIndex.CameraIndex, new GLImageOESInputFilter(context));
         // 美颜滤镜
         mFilterArrays.put(RenderIndex.BeautyIndex, new GLImageBeautyFilter(context));
-        // 彩妆滤镜
-        mFilterArrays.put(RenderIndex.MakeupIndex, new GLImageMakeupFilter(context, null));
-        // 美型滤镜
-        mFilterArrays.put(RenderIndex.FaceAdjustIndex, new GLImageFaceReshapeFilter(context));
-//        mFilterArrays.put(RenderIndex.FaceAdjustIndex, null);
-        // LUT/颜色滤镜
-        mFilterArrays.put(RenderIndex.FilterIndex, null);
-        // 贴纸资源滤镜
-        mFilterArrays.put(RenderIndex.ResourceIndex, null);
-        // 景深滤镜
-        mFilterArrays.put(RenderIndex.DepthBlurIndex, new GLImageDepthBlurFilter(context));
-        // 暗角滤镜
-        mFilterArrays.put(RenderIndex.VignetteIndex, new GLImageVignetteFilter(context));
         // 显示输出
         mFilterArrays.put(RenderIndex.DisplayIndex, new GLImageFilter(context));
-        // 人脸关键点调试
-        //llk：用不上，先注释，因为依赖东西太多了
-//        mFilterArrays.put(RenderIndex.FacePointIndex, new GLImageFacePointsFilter(context));
     }
 
     /**
@@ -166,41 +146,6 @@ public final class RenderManager {
                 }
                 currentTexture = mFilterArrays.get(RenderIndex.BeautyIndex).drawFrameBuffer(currentTexture, mVertexBuffer, mTextureBuffer);
             }
-
-            // 彩妆滤镜
-            if (mFilterArrays.get(RenderIndex.MakeupIndex) != null) {
-                currentTexture = mFilterArrays.get(RenderIndex.MakeupIndex).drawFrameBuffer(currentTexture, mVertexBuffer, mTextureBuffer);
-            }
-
-            // 美型滤镜
-            if (mFilterArrays.get(RenderIndex.FaceAdjustIndex) != null) {
-                if (mFilterArrays.get(RenderIndex.FaceAdjustIndex) instanceof IBeautify) {
-                    ((IBeautify) mFilterArrays.get(RenderIndex.FaceAdjustIndex)).onBeauty(mCameraParam.beauty);
-                }
-                currentTexture = mFilterArrays.get(RenderIndex.FaceAdjustIndex).drawFrameBuffer(currentTexture, mVertexBuffer, mTextureBuffer);
-            }
-
-            // 绘制颜色滤镜
-            if (mFilterArrays.get(RenderIndex.FilterIndex) != null) {
-                currentTexture = mFilterArrays.get(RenderIndex.FilterIndex).drawFrameBuffer(currentTexture, mVertexBuffer, mTextureBuffer);
-            }
-
-            // 资源滤镜，可以是贴纸、滤镜甚至是彩妆类型
-            if (mFilterArrays.get(RenderIndex.ResourceIndex) != null) {
-                currentTexture = mFilterArrays.get(RenderIndex.ResourceIndex).drawFrameBuffer(currentTexture, mVertexBuffer, mTextureBuffer);
-            }
-
-            // 景深
-            if (mFilterArrays.get(RenderIndex.DepthBlurIndex) != null) {
-                mFilterArrays.get(RenderIndex.DepthBlurIndex).setFilterEnable(mCameraParam.enableDepthBlur);
-                currentTexture = mFilterArrays.get(RenderIndex.DepthBlurIndex).drawFrameBuffer(currentTexture, mVertexBuffer, mTextureBuffer);
-            }
-
-            // 暗角
-            if (mFilterArrays.get(RenderIndex.VignetteIndex) != null) {
-                mFilterArrays.get(RenderIndex.VignetteIndex).setFilterEnable(mCameraParam.enableVignette);
-                currentTexture = mFilterArrays.get(RenderIndex.VignetteIndex).drawFrameBuffer(currentTexture, mVertexBuffer, mTextureBuffer);
-            }
         }
 
         // 显示输出，需要调整视口大小
@@ -208,19 +153,6 @@ public final class RenderManager {
 
         return currentTexture;
     }
-
-    /**
-     * 绘制调试用的人脸关键点
-     * @param mCurrentTexture
-     */
-    //llk：用不上，先注释。LandmarkEngine -> 又要依赖一整个模块
-//    public void drawFacePoint(int mCurrentTexture) {
-//        if (mFilterArrays.get(RenderIndex.FacePointIndex) != null) {
-//            if (mCameraParam.drawFacePoints && LandmarkEngine.getInstance().hasFace()) {
-//                mFilterArrays.get(RenderIndex.FacePointIndex).drawFrame(mCurrentTexture, mDisplayVertexBuffer, mDisplayTextureBuffer);
-//            }
-//        }
-//    }
 
     /**
      * 设置输入纹理大小
