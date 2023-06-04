@@ -9,7 +9,7 @@ import android.util.Log;
  */
 public class HWMediaRecorder implements OnRecordListener {
 
-    private static final String TAG = "FFMediaRecorder";
+    private static final String TAG = "HWMediaRecorder";
     private static final boolean VERBOSE = false;
 
     public static final int SECOND_IN_US = 1000000;

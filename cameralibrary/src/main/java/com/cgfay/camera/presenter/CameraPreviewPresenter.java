@@ -12,8 +12,10 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.cgfay.camera.activity.CameraSettingActivity;
+import com.cgfay.camera.camera.CameraApi;
 import com.cgfay.camera.camera.CameraController;
 import com.cgfay.camera.camera.CameraParam;
+import com.cgfay.camera.camera.CameraXController;
 import com.cgfay.camera.camera.ICameraController;
 import com.cgfay.camera.camera.OnFrameAvailableListener;
 import com.cgfay.camera.camera.OnSurfaceTextureListener;
@@ -127,13 +129,11 @@ public class CameraPreviewPresenter extends PreviewPresenter<CameraPreviewFragme
 
         mCameraRenderer.initRenderer();
 
-//        // 备注：目前支持CameraX的渲染流程，但CameraX回调预览帧数据有些问题，人脸关键点SDK检测返回的数据错乱，暂不建议在商用项目中使用CameraX
-//        if (CameraApi.hasCamera2(mActivity)) {
-//            mCameraController = new CameraXController(mActivity);
-//        } else {
-//            mCameraController = new CameraController(mActivity);
-//        }
-        mCameraController = new CameraController(mActivity);
+        if (CameraApi.hasCamera2(mActivity)) {
+            mCameraController = new CameraXController(mActivity);
+        } else {
+            mCameraController = new CameraController(mActivity);
+        }
         mCameraController.setPreviewCallback(this);
         mCameraController.setOnFrameAvailableListener(this);
         mCameraController.setOnSurfaceTextureListener(this);
@@ -515,6 +515,7 @@ public class CameraPreviewPresenter extends PreviewPresenter<CameraPreviewFragme
 
     @Override
     public void onRecordFinish(RecordInfo info) {
+        Log.e("llk", "onRecordFinish " + info.getType() + " " + info.getFileName());
         if (info.getType() == MediaType.AUDIO) {
             mAudioInfo = info;
         } else if (info.getType() == MediaType.VIDEO) {
