@@ -6,11 +6,11 @@ import android.media.Image;
 import android.media.ImageReader;
 import android.opengl.EGLContext;
 
-import com.cgfay.filter.gles.EglCore;
-import com.cgfay.filter.gles.WindowSurface;
-import com.cgfay.filter.glfilter.base.GLImageFilter;
-import com.cgfay.filter.glfilter.utils.OpenGLUtils;
-import com.cgfay.filter.glfilter.utils.TextureRotationUtils;
+import com.llk.beauty_camera.filter.bean.GLImageFilter;
+import com.llk.beauty_camera.filter.gles.EglCore;
+import com.llk.beauty_camera.filter.gles.WindowSurface;
+import com.llk.beauty_camera.filter.utils.OpenGLUtils;
+import com.llk.beauty_camera.filter.utils.TextureRotationUtils;
 
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;

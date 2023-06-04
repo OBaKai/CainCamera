@@ -2,12 +2,12 @@ package com.llk.beauty_camera.camera;
 
 import android.hardware.Camera;
 
-import com.cgfay.filter.glfilter.beauty.bean.BeautyParam;
 import com.llk.beauty_camera.camera.listener.OnCaptureListener;
 import com.llk.beauty_camera.camera.listener.OnFpsListener;
 import com.llk.beauty_camera.camera.listener.OnPreviewCaptureListener;
 import com.llk.beauty_camera.camera.model.AspectRatio;
 import com.llk.beauty_camera.camera.model.GalleryType;
+import com.llk.beauty_camera.filter.bean.beauty.BeautyParam;
 
 /**
  * 相机配置参数

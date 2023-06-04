@@ -3,13 +3,13 @@ package com.llk.beauty_camera.renderer;
 import android.content.Context;
 import android.util.SparseArray;
 
-import com.cgfay.filter.glfilter.base.GLImageFilter;
-import com.cgfay.filter.glfilter.base.GLImageOESInputFilter;
-import com.cgfay.filter.glfilter.beauty.GLImageBeautyFilter;
-import com.cgfay.filter.glfilter.beauty.bean.IBeautify;
-import com.cgfay.filter.glfilter.utils.OpenGLUtils;
-import com.cgfay.filter.glfilter.utils.TextureRotationUtils;
 import com.llk.beauty_camera.camera.CameraParam;
+import com.llk.beauty_camera.filter.bean.GLImageFilter;
+import com.llk.beauty_camera.filter.bean.GLImageOESInputFilter;
+import com.llk.beauty_camera.filter.bean.beauty.GLImageBeautyFilter;
+import com.llk.beauty_camera.filter.bean.beauty.IBeautify;
+import com.llk.beauty_camera.filter.utils.OpenGLUtils;
+import com.llk.beauty_camera.filter.utils.TextureRotationUtils;
 
 import java.nio.FloatBuffer;
 

@@ -11,11 +11,11 @@ import android.view.Surface;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.cgfay.filter.gles.EglCore;
-import com.cgfay.filter.gles.WindowSurface;
-import com.cgfay.filter.glfilter.utils.OpenGLUtils;
 import com.llk.beauty_camera.BaseBeautyCameraComponent;
 import com.llk.beauty_camera.camera.CameraParam;
+import com.llk.beauty_camera.filter.gles.EglCore;
+import com.llk.beauty_camera.filter.gles.WindowSurface;
+import com.llk.beauty_camera.filter.utils.OpenGLUtils;
 
 import java.lang.ref.WeakReference;
 

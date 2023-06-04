@@ -53,7 +53,7 @@ android {
 
 def camerax_version = "1.0.0-rc03"
 dependencies {
-    implementation project(':filterlibrary')
+//    implementation project(':filterlibrary')
 
     // CameraX core library
     implementation "androidx.camera:camera-core:${camerax_version}"

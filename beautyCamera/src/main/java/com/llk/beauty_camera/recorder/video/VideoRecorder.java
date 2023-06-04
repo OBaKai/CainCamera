@@ -7,11 +7,11 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.cgfay.filter.gles.EglCore;
-import com.cgfay.filter.gles.WindowSurface;
-import com.cgfay.filter.glfilter.base.GLImageFilter;
-import com.cgfay.filter.glfilter.utils.OpenGLUtils;
-import com.cgfay.filter.glfilter.utils.TextureRotationUtils;
+import com.llk.beauty_camera.filter.bean.GLImageFilter;
+import com.llk.beauty_camera.filter.gles.EglCore;
+import com.llk.beauty_camera.filter.gles.WindowSurface;
+import com.llk.beauty_camera.filter.utils.OpenGLUtils;
+import com.llk.beauty_camera.filter.utils.TextureRotationUtils;
 import com.llk.beauty_camera.recorder.MediaType;
 import com.llk.beauty_camera.recorder.OnRecordListener;
 import com.llk.beauty_camera.recorder.RecordInfo;

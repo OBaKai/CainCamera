@@ -9,8 +9,6 @@ import android.view.TextureView;
 
 import androidx.core.view.GestureDetectorCompat;
 
-import com.cgfay.filter.glfilter.stickers.StaticStickerNormalFilter;
-
 public class CameraTextureView extends TextureView {
 
     private static final String TAG = CameraTextureView.class.getSimpleName();
@@ -37,8 +35,6 @@ public class CameraTextureView extends TextureView {
         init(context);
     }
 
-    //测试贴纸的移动
-    StaticStickerNormalFilter dragSticker=null;
     private void init(Context context) {
         setClickable(true);
         mGestureDetector = new GestureDetectorCompat(getContext(), new GestureDetector.OnGestureListener() {
@@ -64,7 +60,6 @@ public class CameraTextureView extends TextureView {
                 if (VERBOSE) {
                     Log.d(TAG, "onSingleTapUp: ");
                 }
-                dragSticker = null;
                 return false;
             }
 
@@ -72,11 +67,6 @@ public class CameraTextureView extends TextureView {
             public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
                 if (VERBOSE) {
                     Log.d(TAG, "onScroll: ");
-                }
-
-                if (dragSticker != null) {
-                    dragSticker.onScroll(distanceX,distanceY);
-                    return true;
                 }
 
                 // 上下滑动
@@ -108,10 +98,6 @@ public class CameraTextureView extends TextureView {
             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
                 if (VERBOSE) {
                     Log.d(TAG, "onFling: ");
-                }
-
-                if (dragSticker != null) {
-                    return false;
                 }
 
                 // 快速左右滑动
