@@ -103,10 +103,4 @@ public abstract class BaseBeautyCameraComponent extends IBaseComponentlifecycle 
      * @param on    打开闪光灯
      */
     public abstract void changeFlashLight(boolean on);
-
-    /**
-     * 是否允许边框模糊
-     * @param enable true:允许边框模糊
-     */
-    public abstract void enableEdgeBlurFilter(boolean enable);
 }

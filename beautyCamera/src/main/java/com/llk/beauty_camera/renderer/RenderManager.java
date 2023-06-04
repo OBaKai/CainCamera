@@ -11,7 +11,6 @@ import com.cgfay.filter.glfilter.beauty.GLImageBeautyFilter;
 import com.cgfay.filter.glfilter.beauty.bean.IBeautify;
 import com.cgfay.filter.glfilter.face.GLImageFaceReshapeFilter;
 import com.cgfay.filter.glfilter.makeup.GLImageMakeupFilter;
-import com.cgfay.filter.glfilter.multiframe.GLImageFrameEdgeBlurFilter;
 import com.cgfay.filter.glfilter.utils.OpenGLUtils;
 import com.cgfay.filter.glfilter.utils.TextureRotationUtils;
 import com.llk.beauty_camera.camera.CameraParam;
@@ -139,26 +138,6 @@ public final class RenderManager {
         // 人脸关键点调试
         //llk：用不上，先注释，因为依赖东西太多了
 //        mFilterArrays.put(RenderIndex.FacePointIndex, new GLImageFacePointsFilter(context));
-    }
-
-    /**
-     * 是否切换边框模糊
-     * @param enableEdgeBlur
-     */
-    public synchronized void changeEdgeBlurFilter(boolean enableEdgeBlur) {
-        if (enableEdgeBlur) {
-            mFilterArrays.get(RenderIndex.DisplayIndex).release();
-            GLImageFrameEdgeBlurFilter filter = new GLImageFrameEdgeBlurFilter(mContext);
-            filter.onInputSizeChanged(mTextureWidth, mTextureHeight);
-            filter.onDisplaySizeChanged(mViewWidth, mViewHeight);
-            mFilterArrays.put(RenderIndex.DisplayIndex, filter);
-        } else {
-            mFilterArrays.get(RenderIndex.DisplayIndex).release();
-            GLImageFilter filter = new GLImageFilter(mContext);
-            filter.onInputSizeChanged(mTextureWidth, mTextureHeight);
-            filter.onDisplaySizeChanged(mViewWidth, mViewHeight);
-            mFilterArrays.put(RenderIndex.DisplayIndex, filter);
-        }
     }
 
     /**

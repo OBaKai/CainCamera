@@ -379,11 +379,6 @@ public class BeautyCameraManager extends BaseBeautyCameraComponent {
         }
     }
 
-    @Override
-    public void enableEdgeBlurFilter(boolean enable) {
-        mCameraRenderer.changeEdgeBlur(enable);
-    }
-
     public interface CameraStateCallback{
         void onCameraRecordStart();
         void onCameraRecording(long duration);

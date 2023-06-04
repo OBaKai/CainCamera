@@ -19,7 +19,6 @@ public class CameraRenderHandler extends Handler {
     static final int MSG_DISPLAY_CHANGE = 0x02;     // 显示发生变化
     static final int MSG_DESTROY = 0x03;            // 销毁
     static final int MSG_RENDER = 0x04;             // 渲染
-    static final int MSG_CHANGE_EDGE_BLUR = 0x08;   // 边框模糊功能
 
     // 渲染事件处理队列
     private ArrayList<Runnable> mEventQueue = new ArrayList<Runnable>();
@@ -64,11 +63,6 @@ public class CameraRenderHandler extends Handler {
             // 渲染一帧数据
             case MSG_RENDER:
                 renderer.onDrawFrame();
-                break;
-
-            // 切换边框模糊滤镜
-            case MSG_CHANGE_EDGE_BLUR:
-                renderer.changeEdgeBlurFilter((boolean)msg.obj);
                 break;
         }
     }

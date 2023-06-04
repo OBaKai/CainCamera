@@ -212,15 +212,6 @@ public class CameraRenderer extends Thread {
         getHandler().sendEmptyMessage(CameraRenderHandler.MSG_RENDER);
     }
 
-    /**
-     * 切换边框模糊功能
-     * @param hasBlur 是否允许边框模糊
-     */
-    public void changeEdgeBlur(boolean hasBlur) {
-        Handler handler = getHandler();
-        handler.sendMessage(handler.obtainMessage(CameraRenderHandler.MSG_CHANGE_EDGE_BLUR, hasBlur));
-    }
-
     // ---------------------------------------- 渲染内部处理方法 -------------------------------------
     /**
      * 初始化渲染器
@@ -384,17 +375,6 @@ public class CameraRenderer extends Thread {
         if ((mCameraParam).fpsCallback != null) {
             mFrameRateMeter.drawFrameCount();
             (mCameraParam).fpsCallback.onFpsCallback(mFrameRateMeter.getFPS());
-        }
-    }
-
-    /**
-     * 切换边框模糊
-     * @param enableEdgeBlur
-     */
-    void changeEdgeBlurFilter(boolean enableEdgeBlur) {
-        synchronized (mSync) {
-            mDisplaySurface.makeCurrent();
-            mRenderManager.changeEdgeBlurFilter(enableEdgeBlur);
         }
     }
 
