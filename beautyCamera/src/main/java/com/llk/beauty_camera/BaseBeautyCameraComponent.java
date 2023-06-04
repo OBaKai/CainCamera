@@ -3,11 +3,8 @@ package com.llk.beauty_camera;
 import android.graphics.SurfaceTexture;
 import android.opengl.EGLContext;
 
-import androidx.annotation.NonNull;
-
 import com.cgfay.filter.glfilter.color.bean.DynamicColor;
 import com.cgfay.filter.glfilter.makeup.bean.DynamicMakeup;
-import com.cgfay.filter.glfilter.resource.bean.ResourceData;
 import com.llk.beauty_camera.recorder.SpeedMode;
 
 /**
@@ -47,12 +44,6 @@ public abstract class BaseBeautyCameraComponent extends IBaseComponentlifecycle 
      * SurfaceTexture 销毁
      */
     public abstract void onSurfaceDestroyed();
-
-    /**
-     * 切换道具资源
-     * @param resourceData
-     */
-    public abstract void changeResource(@NonNull ResourceData resourceData);
 
     /**
      * 切换滤镜

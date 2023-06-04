@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Process;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.Surface;
 
 import androidx.annotation.NonNull;
@@ -16,8 +15,6 @@ import com.cgfay.filter.gles.EglCore;
 import com.cgfay.filter.gles.WindowSurface;
 import com.cgfay.filter.glfilter.color.bean.DynamicColor;
 import com.cgfay.filter.glfilter.makeup.bean.DynamicMakeup;
-import com.cgfay.filter.glfilter.stickers.StaticStickerNormalFilter;
-import com.cgfay.filter.glfilter.stickers.bean.DynamicSticker;
 import com.cgfay.filter.glfilter.utils.OpenGLUtils;
 import com.llk.beauty_camera.BaseBeautyCameraComponent;
 import com.llk.beauty_camera.camera.CameraParam;
@@ -236,24 +233,6 @@ public class CameraRenderer extends Thread {
     }
 
     /**
-     * 切换道具资源
-     * @param color 滤镜
-     */
-    public void changeResource(DynamicColor color) {
-        Handler handler = getHandler();
-        handler.sendMessage(handler.obtainMessage(CameraRenderHandler.MSG_CHANGE_RESOURCE, color));
-    }
-
-    /**
-     * 切换道具资源
-     * @param sticker 动态贴纸
-     */
-    public void changeResource(DynamicSticker sticker) {
-        Handler handler = getHandler();
-        handler.sendMessage(handler.obtainMessage(CameraRenderHandler.MSG_CHANGE_RESOURCE, sticker));
-    }
-
-    /**
      * 切换边框模糊功能
      * @param hasBlur 是否允许边框模糊
      */
@@ -458,28 +437,6 @@ public class CameraRenderer extends Thread {
         synchronized (mSync) {
             mDisplaySurface.makeCurrent();
             mRenderManager.changeDynamicMakeup(makeup);
-        }
-    }
-
-    /**
-     * 切换动态资源
-     * @param color
-     */
-    void changeDynamicResource(DynamicColor color) {
-        synchronized (mSync) {
-            mDisplaySurface.makeCurrent();
-            mRenderManager.changeDynamicResource(color);
-        }
-    }
-
-    /**
-     * 切换动态资源
-     * @param sticker
-     */
-    void changeDynamicResource(DynamicSticker sticker) {
-        synchronized (mSync) {
-            mDisplaySurface.makeCurrent();
-            mRenderManager.changeDynamicResource(sticker);
         }
     }
 

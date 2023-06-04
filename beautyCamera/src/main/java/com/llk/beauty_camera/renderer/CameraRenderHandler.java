@@ -25,7 +25,6 @@ public class CameraRenderHandler extends Handler {
     static final int MSG_RENDER = 0x04;             // 渲染
     static final int MSG_CHANGE_FILTER = 0x05;      // 切换滤镜
     static final int MSG_CHANGE_MAKEUP = 0x06;      // 切换彩妆
-    static final int MSG_CHANGE_RESOURCE = 0x07;    // 切换贴纸资源
     static final int MSG_CHANGE_EDGE_BLUR = 0x08;   // 边框模糊功能
 
     // 渲染事件处理队列
@@ -84,17 +83,6 @@ public class CameraRenderHandler extends Handler {
                     renderer.changeDynamicMakeup((DynamicMakeup) null);
                 } else {
                     renderer.changeDynamicMakeup((DynamicMakeup) msg.obj);
-                }
-                break;
-
-            // 切换道具资源
-            case MSG_CHANGE_RESOURCE:
-                if (msg.obj == null) {
-                    renderer.changeDynamicResource((DynamicSticker) null);
-                } else if (msg.obj instanceof DynamicColor) {
-                    renderer.changeDynamicResource((DynamicColor) msg.obj);
-                } else if (msg.obj instanceof DynamicSticker) {
-                    renderer.changeDynamicResource((DynamicSticker) msg.obj);
                 }
                 break;
 

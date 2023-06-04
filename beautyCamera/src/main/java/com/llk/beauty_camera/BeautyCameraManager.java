@@ -5,17 +5,12 @@ import android.graphics.SurfaceTexture;
 import android.opengl.EGLContext;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import com.cgfay.filter.glfilter.color.bean.DynamicColor;
 import com.cgfay.filter.glfilter.makeup.bean.DynamicMakeup;
 import com.cgfay.filter.glfilter.resource.FilterHelper;
-import com.cgfay.filter.glfilter.resource.ResourceHelper;
 import com.cgfay.filter.glfilter.resource.ResourceJsonCodec;
-import com.cgfay.filter.glfilter.resource.bean.ResourceData;
-import com.cgfay.filter.glfilter.resource.bean.ResourceType;
-import com.cgfay.filter.glfilter.stickers.bean.DynamicSticker;
 import com.llk.beauty_camera.camera.CameraApi;
 import com.llk.beauty_camera.camera.CameraController;
 import com.llk.beauty_camera.camera.CameraParam;
@@ -312,49 +307,6 @@ public class BeautyCameraManager extends BaseBeautyCameraComponent {
     @Override
     public void onSurfaceDestroyed() {
         mCameraRenderer.onSurfaceDestroyed();
-    }
-
-    @Override
-    public void changeResource(@NonNull ResourceData resourceData) {
-        ResourceType type = resourceData.type;
-        String unzipFolder = resourceData.unzipFolder;
-        if (type == null) {
-            return;
-        }
-        try {
-            switch (type) {
-                // 单纯的滤镜
-                case FILTER: {
-                    String folderPath = ResourceHelper.getResourceDirectory(mContext) + File.separator + unzipFolder;
-                    DynamicColor color = ResourceJsonCodec.decodeFilterData(folderPath);
-                    mCameraRenderer.changeResource(color);
-                    break;
-                }
-
-                // 贴纸
-                case STICKER: {
-                    String folderPath = ResourceHelper.getResourceDirectory(mContext) + File.separator + unzipFolder;
-                    DynamicSticker sticker = ResourceJsonCodec.decodeStickerData(folderPath);
-                    mCameraRenderer.changeResource(sticker);
-                    break;
-                }
-
-                case MULTI: { //多种结果混合
-                    break;
-                }
-
-                // 所有数据均为空
-                case NONE: {
-                    mCameraRenderer.changeResource((DynamicSticker) null);
-                    break;
-                }
-
-                default:
-                    break;
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "parseResource: ", e);
-        }
     }
 
     @Override
