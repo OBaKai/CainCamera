@@ -3,7 +3,6 @@ package com.llk.beauty_camera;
 import android.graphics.SurfaceTexture;
 import android.opengl.EGLContext;
 
-import com.cgfay.filter.glfilter.color.bean.DynamicColor;
 import com.cgfay.filter.glfilter.makeup.bean.DynamicMakeup;
 import com.llk.beauty_camera.recorder.SpeedMode;
 
@@ -46,22 +45,10 @@ public abstract class BaseBeautyCameraComponent extends IBaseComponentlifecycle 
     public abstract void onSurfaceDestroyed();
 
     /**
-     * 切换滤镜
-     * @param color
-     */
-    public abstract void changeDynamicFilter(DynamicColor color);
-
-    /**
      * 切换彩妆
      * @param makeup
      */
     public abstract void changeDynamicMakeup(DynamicMakeup makeup);
-
-    /**
-     * 切换滤镜
-     * @param filterIndex
-     */
-    public abstract void changeDynamicFilter(int filterIndex);
 
     /**
      * 前一个滤镜

@@ -7,10 +7,7 @@ import android.util.Log;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.cgfay.filter.glfilter.color.bean.DynamicColor;
 import com.cgfay.filter.glfilter.makeup.bean.DynamicMakeup;
-import com.cgfay.filter.glfilter.resource.FilterHelper;
-import com.cgfay.filter.glfilter.resource.ResourceJsonCodec;
 import com.llk.beauty_camera.camera.CameraApi;
 import com.llk.beauty_camera.camera.CameraController;
 import com.llk.beauty_camera.camera.CameraParam;
@@ -28,8 +25,6 @@ import com.llk.beauty_camera.recorder.video.VideoParams;
 import com.llk.beauty_camera.renderer.CameraRenderer;
 import com.llk.beauty_camera.utils.BrightnessUtils;
 import com.llk.beauty_camera.utils.FileTools;
-
-import java.io.File;
 
 /**
  * author: llk
@@ -310,28 +305,8 @@ public class BeautyCameraManager extends BaseBeautyCameraComponent {
     }
 
     @Override
-    public void changeDynamicFilter(DynamicColor color) {
-        mCameraRenderer.changeFilter(color);
-    }
-
-    @Override
     public void changeDynamicMakeup(DynamicMakeup makeup) {
         mCameraRenderer.changeMakeup(makeup);
-    }
-
-    @Override
-    public void changeDynamicFilter(int filterIndex) {
-        String folderPath = FilterHelper.getFilterDirectory(mContext) + File.separator +
-                FilterHelper.getFilterList().get(filterIndex).unzipFolder;
-        DynamicColor color = null;
-        if (!FilterHelper.getFilterList().get(filterIndex).unzipFolder.equalsIgnoreCase("none")) {
-            try {
-                color = ResourceJsonCodec.decodeFilterData(folderPath);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        mCameraRenderer.changeFilter(color);
     }
 
     @Override

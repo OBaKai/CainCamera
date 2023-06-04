@@ -165,26 +165,6 @@ public final class RenderManager {
             mFilterArrays.put(RenderIndex.DisplayIndex, filter);
         }
     }
-
-    /**
-     * 切换动态滤镜
-     * @param color
-     */
-    public synchronized void changeDynamicFilter(DynamicColor color) {
-        if (mFilterArrays.get(RenderIndex.FilterIndex) != null) {
-            mFilterArrays.get(RenderIndex.FilterIndex).release();
-            mFilterArrays.put(RenderIndex.FilterIndex, null);
-        }
-        if (color == null) {
-            return;
-        }
-        GLImageDynamicColorFilter filter = new GLImageDynamicColorFilter(mContext, color);
-        filter.onInputSizeChanged(mTextureWidth, mTextureHeight);
-        filter.initFrameBuffer(mTextureWidth, mTextureHeight);
-        filter.onDisplaySizeChanged(mViewWidth, mViewHeight);
-        mFilterArrays.put(RenderIndex.FilterIndex, filter);
-    }
-
     /**
      * 切换动态滤镜
      * @param dynamicMakeup

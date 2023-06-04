@@ -215,15 +215,6 @@ public class CameraRenderer extends Thread {
     }
 
     /**
-     * 切换滤镜
-     * @param color
-     */
-    public void changeFilter(DynamicColor color) {
-        Handler handler = getHandler();
-        handler.sendMessage(handler.obtainMessage(CameraRenderHandler.MSG_CHANGE_FILTER, color));
-    }
-
-    /**
      * 切换彩妆
      * @param makeup
      */
@@ -415,17 +406,6 @@ public class CameraRenderer extends Thread {
         synchronized (mSync) {
             mDisplaySurface.makeCurrent();
             mRenderManager.changeEdgeBlurFilter(enableEdgeBlur);
-        }
-    }
-
-    /**
-     * 切换动态滤镜
-     * @param color
-     */
-    void changeDynamicFilter(DynamicColor color) {
-        synchronized (mSync) {
-            mDisplaySurface.makeCurrent();
-            mRenderManager.changeDynamicFilter(color);
         }
     }
 
