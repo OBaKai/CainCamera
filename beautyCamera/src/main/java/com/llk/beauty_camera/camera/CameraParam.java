@@ -89,8 +89,8 @@ public final class CameraParam {
     public OnCaptureListener captureCallback;
     // fps回调
     public OnFpsListener fpsCallback;
-    // 是否显示对比效果
-    public boolean showCompare;
+    // 是否关闭所有滤镜
+    public boolean isCloseBeautyFilter;
     // 是否拍照
     public boolean isTakePicture;
 
@@ -138,7 +138,7 @@ public final class CameraParam {
         captureListener = null;
         captureCallback = null;
         fpsCallback = null;
-        showCompare = false;
+        isCloseBeautyFilter = false;
         isTakePicture = false;
         enableDepthBlur = false;
         enableVignette = false;

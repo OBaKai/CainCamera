@@ -1,3 +1,4 @@
 include ':app', ':cameralibrary', ':filterlibrary', ':videolibrary', ':gdxlibrary', ':widgetlibrary',
         ':landmarklibrary', ':pickerlibrary', ':imagelibrary', ':medialibrary', ':utilslibrary'
 include ':beautyCamera'
+include ':app_bc'

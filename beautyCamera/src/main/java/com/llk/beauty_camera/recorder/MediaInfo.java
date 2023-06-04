@@ -7,11 +7,11 @@ package com.llk.beauty_camera.recorder;
  */
 public class MediaInfo {
 
-    private String fileName;
+    private String filePath;
     private long duration;
 
-    public MediaInfo(String name, long duration) {
-        this.fileName = name;
+    public MediaInfo(String path, long duration) {
+        this.filePath = path;
         this.duration = duration;
     }
 
@@ -19,7 +19,7 @@ public class MediaInfo {
         return duration;
     }
 
-    public String getFileName() {
-        return fileName;
+    public String getFilePath() {
+        return filePath;
     }
 }
