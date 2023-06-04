@@ -1,11 +1,8 @@
 package com.llk.beauty_camera.renderer;
 
 import android.content.Context;
-import android.util.Log;
 import android.util.SparseArray;
-import android.view.MotionEvent;
 
-import com.badlogic.gdx.math.Vector3;
 import com.cgfay.filter.glfilter.base.GLImageDepthBlurFilter;
 import com.cgfay.filter.glfilter.base.GLImageFilter;
 import com.cgfay.filter.glfilter.base.GLImageOESInputFilter;
@@ -19,8 +16,6 @@ import com.cgfay.filter.glfilter.makeup.GLImageMakeupFilter;
 import com.cgfay.filter.glfilter.makeup.bean.DynamicMakeup;
 import com.cgfay.filter.glfilter.multiframe.GLImageFrameEdgeBlurFilter;
 import com.cgfay.filter.glfilter.stickers.GLImageDynamicStickerFilter;
-import com.cgfay.filter.glfilter.stickers.GestureHelp;
-import com.cgfay.filter.glfilter.stickers.StaticStickerNormalFilter;
 import com.cgfay.filter.glfilter.stickers.bean.DynamicSticker;
 import com.cgfay.filter.glfilter.utils.OpenGLUtils;
 import com.cgfay.filter.glfilter.utils.TextureRotationUtils;
@@ -445,27 +440,5 @@ public final class RenderManager {
      */
     private float addDistance(float coordinate, float distance) {
         return coordinate == 0.0f ? distance : 1 - distance;
-    }
-
-    public static final Vector3 tempVec=new Vector3();
-    public StaticStickerNormalFilter touchDown(MotionEvent e) {
-
-        if (mFilterArrays.get(RenderIndex.ResourceIndex) != null) {
-          GLImageFilter  glImageFilter = mFilterArrays.get(RenderIndex.ResourceIndex);
-          if(glImageFilter instanceof GLImageDynamicStickerFilter) {
-              GLImageDynamicStickerFilter glImageDynamicStickerFilter= (GLImageDynamicStickerFilter) glImageFilter;
-              tempVec.set(e.getX(), e.getY(), 0);
-              StaticStickerNormalFilter staticStickerNormalFilter=GestureHelp.hit(tempVec,glImageDynamicStickerFilter.getmFilters());
-              if(staticStickerNormalFilter!=null){
-                  Log.d("touchSticker","找到贴纸");
-              }else{
-                  Log.d("touchSticker","没有贴纸");
-              }
-              return staticStickerNormalFilter;
-          }
-        }
-
-        return null;
-
     }
 }

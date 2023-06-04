@@ -218,20 +218,6 @@ public class CameraRenderer extends Thread {
     }
 
     /**
-     * 获取触摸滤镜
-     * @param e 触摸类型
-     * @return 返回触摸滤镜
-     */
-    public StaticStickerNormalFilter getTouchableFilter(MotionEvent e) {
-        synchronized (mSync) {
-            if (mRenderManager != null) {
-                return mRenderManager.touchDown(e);
-            }
-        }
-        return null;
-    }
-
-    /**
      * 切换滤镜
      * @param color
      */
