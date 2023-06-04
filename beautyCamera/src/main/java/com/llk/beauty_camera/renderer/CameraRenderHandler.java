@@ -7,10 +7,6 @@ import android.os.Message;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 
-import com.cgfay.filter.glfilter.color.bean.DynamicColor;
-import com.cgfay.filter.glfilter.makeup.bean.DynamicMakeup;
-import com.cgfay.filter.glfilter.stickers.bean.DynamicSticker;
-
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
@@ -23,7 +19,6 @@ public class CameraRenderHandler extends Handler {
     static final int MSG_DISPLAY_CHANGE = 0x02;     // 显示发生变化
     static final int MSG_DESTROY = 0x03;            // 销毁
     static final int MSG_RENDER = 0x04;             // 渲染
-    static final int MSG_CHANGE_MAKEUP = 0x06;      // 切换彩妆
     static final int MSG_CHANGE_EDGE_BLUR = 0x08;   // 边框模糊功能
 
     // 渲染事件处理队列
@@ -69,15 +64,6 @@ public class CameraRenderHandler extends Handler {
             // 渲染一帧数据
             case MSG_RENDER:
                 renderer.onDrawFrame();
-                break;
-
-            // 切换彩妆
-            case MSG_CHANGE_MAKEUP:
-                if (msg.obj == null) {
-                    renderer.changeDynamicMakeup((DynamicMakeup) null);
-                } else {
-                    renderer.changeDynamicMakeup((DynamicMakeup) msg.obj);
-                }
                 break;
 
             // 切换边框模糊滤镜

@@ -13,8 +13,6 @@ import androidx.annotation.Nullable;
 
 import com.cgfay.filter.gles.EglCore;
 import com.cgfay.filter.gles.WindowSurface;
-import com.cgfay.filter.glfilter.color.bean.DynamicColor;
-import com.cgfay.filter.glfilter.makeup.bean.DynamicMakeup;
 import com.cgfay.filter.glfilter.utils.OpenGLUtils;
 import com.llk.beauty_camera.BaseBeautyCameraComponent;
 import com.llk.beauty_camera.camera.CameraParam;
@@ -215,15 +213,6 @@ public class CameraRenderer extends Thread {
     }
 
     /**
-     * 切换彩妆
-     * @param makeup
-     */
-    public void changeMakeup(DynamicMakeup makeup) {
-        Handler handler = getHandler();
-        handler.sendMessage(handler.obtainMessage(CameraRenderHandler.MSG_CHANGE_MAKEUP, makeup));
-    }
-
-    /**
      * 切换边框模糊功能
      * @param hasBlur 是否允许边框模糊
      */
@@ -406,17 +395,6 @@ public class CameraRenderer extends Thread {
         synchronized (mSync) {
             mDisplaySurface.makeCurrent();
             mRenderManager.changeEdgeBlurFilter(enableEdgeBlur);
-        }
-    }
-
-    /**
-     * 切换动态彩妆
-     * @param makeup
-     */
-    void changeDynamicMakeup(DynamicMakeup makeup) {
-        synchronized (mSync) {
-            mDisplaySurface.makeCurrent();
-            mRenderManager.changeDynamicMakeup(makeup);
         }
     }
 

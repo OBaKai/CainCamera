@@ -7,7 +7,6 @@ import android.util.Log;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.cgfay.filter.glfilter.makeup.bean.DynamicMakeup;
 import com.llk.beauty_camera.camera.CameraApi;
 import com.llk.beauty_camera.camera.CameraController;
 import com.llk.beauty_camera.camera.CameraParam;
@@ -302,26 +301,6 @@ public class BeautyCameraManager extends BaseBeautyCameraComponent {
     @Override
     public void onSurfaceDestroyed() {
         mCameraRenderer.onSurfaceDestroyed();
-    }
-
-    @Override
-    public void changeDynamicMakeup(DynamicMakeup makeup) {
-        mCameraRenderer.changeMakeup(makeup);
-    }
-
-    @Override
-    public int previewFilter() {
-        return 0;
-    }
-
-    @Override
-    public int nextFilter() {
-        return 0;
-    }
-
-    @Override
-    public int getFilterIndex() {
-        return 0;
     }
 
     @Override

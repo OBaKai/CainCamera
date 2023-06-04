@@ -9,14 +9,9 @@ import com.cgfay.filter.glfilter.base.GLImageOESInputFilter;
 import com.cgfay.filter.glfilter.base.GLImageVignetteFilter;
 import com.cgfay.filter.glfilter.beauty.GLImageBeautyFilter;
 import com.cgfay.filter.glfilter.beauty.bean.IBeautify;
-import com.cgfay.filter.glfilter.color.GLImageDynamicColorFilter;
-import com.cgfay.filter.glfilter.color.bean.DynamicColor;
 import com.cgfay.filter.glfilter.face.GLImageFaceReshapeFilter;
 import com.cgfay.filter.glfilter.makeup.GLImageMakeupFilter;
-import com.cgfay.filter.glfilter.makeup.bean.DynamicMakeup;
 import com.cgfay.filter.glfilter.multiframe.GLImageFrameEdgeBlurFilter;
-import com.cgfay.filter.glfilter.stickers.GLImageDynamicStickerFilter;
-import com.cgfay.filter.glfilter.stickers.bean.DynamicSticker;
 import com.cgfay.filter.glfilter.utils.OpenGLUtils;
 import com.cgfay.filter.glfilter.utils.TextureRotationUtils;
 import com.llk.beauty_camera.camera.CameraParam;
@@ -164,61 +159,6 @@ public final class RenderManager {
             filter.onDisplaySizeChanged(mViewWidth, mViewHeight);
             mFilterArrays.put(RenderIndex.DisplayIndex, filter);
         }
-    }
-    /**
-     * 切换动态滤镜
-     * @param dynamicMakeup
-     */
-    public synchronized void changeDynamicMakeup(DynamicMakeup dynamicMakeup) {
-        if (mFilterArrays.get(RenderIndex.MakeupIndex) != null) {
-            ((GLImageMakeupFilter)mFilterArrays.get(RenderIndex.MakeupIndex)).changeMakeupData(dynamicMakeup);
-        } else {
-            GLImageMakeupFilter filter = new GLImageMakeupFilter(mContext, dynamicMakeup);
-            filter.onInputSizeChanged(mTextureWidth, mTextureHeight);
-            filter.initFrameBuffer(mTextureWidth, mTextureHeight);
-            filter.onDisplaySizeChanged(mViewWidth, mViewHeight);
-            mFilterArrays.put(RenderIndex.MakeupIndex, filter);
-        }
-    }
-
-    /**
-     * 切换动态资源
-     * @param color
-     */
-    public synchronized void changeDynamicResource(DynamicColor color) {
-        if (mFilterArrays.get(RenderIndex.ResourceIndex) != null) {
-            mFilterArrays.get(RenderIndex.ResourceIndex).release();
-            mFilterArrays.put(RenderIndex.ResourceIndex, null);
-        }
-        if (color == null) {
-            return;
-        }
-        GLImageDynamicColorFilter filter = new GLImageDynamicColorFilter(mContext, color);
-        filter.onInputSizeChanged(mTextureWidth, mTextureHeight);
-        filter.initFrameBuffer(mTextureWidth, mTextureHeight);
-        filter.onDisplaySizeChanged(mViewWidth, mViewHeight);
-        mFilterArrays.put(RenderIndex.ResourceIndex, filter);
-    }
-
-    /**
-     * 切换动态资源
-     * @param sticker
-     */
-    public synchronized void changeDynamicResource(DynamicSticker sticker) {
-        // 释放旧滤镜
-        if (mFilterArrays.get(RenderIndex.ResourceIndex) != null) {
-            mFilterArrays.get(RenderIndex.ResourceIndex).release();
-            mFilterArrays.put(RenderIndex.ResourceIndex, null);
-        }
-        if (sticker == null) {
-            return;
-        }
-        GLImageDynamicStickerFilter filter = new GLImageDynamicStickerFilter(mContext, sticker);
-        // 设置输入输入大小，初始化fbo等
-        filter.onInputSizeChanged(mTextureWidth, mTextureHeight);
-        filter.initFrameBuffer(mTextureWidth, mTextureHeight);
-        filter.onDisplaySizeChanged(mViewWidth, mViewHeight);
-        mFilterArrays.put(RenderIndex.ResourceIndex, filter);
     }
 
     /**

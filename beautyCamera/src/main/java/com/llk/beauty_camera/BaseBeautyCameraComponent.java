@@ -3,7 +3,6 @@ package com.llk.beauty_camera;
 import android.graphics.SurfaceTexture;
 import android.opengl.EGLContext;
 
-import com.cgfay.filter.glfilter.makeup.bean.DynamicMakeup;
 import com.llk.beauty_camera.recorder.SpeedMode;
 
 /**
@@ -43,28 +42,6 @@ public abstract class BaseBeautyCameraComponent extends IBaseComponentlifecycle 
      * SurfaceTexture 销毁
      */
     public abstract void onSurfaceDestroyed();
-
-    /**
-     * 切换彩妆
-     * @param makeup
-     */
-    public abstract void changeDynamicMakeup(DynamicMakeup makeup);
-
-    /**
-     * 前一个滤镜
-     */
-    public abstract int previewFilter();
-
-    /**
-     * 下一个滤镜
-     */
-    public abstract int nextFilter();
-
-    /**
-     * 获取当前的滤镜索引
-     * @return
-     */
-    public abstract int getFilterIndex();
 
     /**
      * 是否关闭滤镜
