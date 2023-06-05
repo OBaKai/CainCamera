@@ -18,7 +18,6 @@ import com.llk.beauty_camera.recorder.MediaInfo;
 import com.llk.beauty_camera.recorder.MediaType;
 import com.llk.beauty_camera.recorder.OnRecordStateListener;
 import com.llk.beauty_camera.recorder.RecordInfo;
-import com.llk.beauty_camera.recorder.SpeedMode;
 import com.llk.beauty_camera.recorder.audio.AudioParams;
 import com.llk.beauty_camera.recorder.video.VideoParams;
 import com.llk.beauty_camera.renderer.CameraRenderer;
@@ -83,8 +82,9 @@ public class BeautyCameraManager extends BaseBeautyCameraComponent {
 
         @Override
         public void onRecording(long duration) { //录制中
+            float progress = duration * 1.0f / mVideoParams.getMaxDuration();
             if (cameraStateCallback != null)
-                cameraStateCallback.onCameraRecording(duration);
+                cameraStateCallback.onCameraRecording(progress);
         }
 
         /**
@@ -96,7 +96,6 @@ public class BeautyCameraManager extends BaseBeautyCameraComponent {
                 mAudioInfo = info;
             } else if (info.getType() == MediaType.VIDEO) {
                 mVideoInfo = info;
-                //mCurrentProgress = info.getDuration() * 1.0f / mVideoParams.getMaxDuration();
             }
 
             if (mMediaRecorder == null) return;
@@ -367,12 +366,6 @@ public class BeautyCameraManager extends BaseBeautyCameraComponent {
     }
 
     @Override
-    public void setSpeedMode(SpeedMode mode) {
-        mVideoParams.setSpeedMode(mode);
-        mAudioParams.setSpeedMode(mode);
-    }
-
-    @Override
     public void changeFlashLight(boolean on) {
         if (mCameraController != null) {
             mCameraController.setFlashLight(on);
@@ -381,7 +374,13 @@ public class BeautyCameraManager extends BaseBeautyCameraComponent {
 
     public interface CameraStateCallback{
         void onCameraRecordStart();
-        void onCameraRecording(long duration);
+
+        /**
+         * 录制中
+         * @param progress - 录制进度，范围是：0-1.0
+         */
+        void onCameraRecording(float progress);
+
         void onCamereRecordFinish(MediaInfo mediaInfo);
 
         void onCamereRecordError(int error);

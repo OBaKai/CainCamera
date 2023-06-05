@@ -1,9 +1,6 @@
 package com.llk.beauty_camera.recorder.audio;
 
 import android.media.AudioFormat;
-
-import com.llk.beauty_camera.recorder.SpeedMode;
-
 /**
  * 音频参数
  * @author CainHuang
@@ -24,13 +21,11 @@ public class AudioParams {
     private int mBitRate;       // 比特率
     private int mAudioFormat;   // 采样格式
 
-    SpeedMode mSpeedMode;       // 速度模式
     private String mAudioPath;  // 文件名
     private long mMaxDuration;  // 最大时长
 
     public AudioParams() {
         mSampleRate = SAMPLE_RATE;
-        mSpeedMode = SpeedMode.MODE_NORMAL;
         mChannel =  AudioFormat.CHANNEL_IN_STEREO;
         mBitRate = BIT_RATE;
         mAudioFormat = AudioFormat.ENCODING_PCM_16BIT;
@@ -66,14 +61,6 @@ public class AudioParams {
 
     public int getAudioFormat() {
         return mAudioFormat;
-    }
-
-    public void setSpeedMode(SpeedMode mode) {
-        this.mSpeedMode = mode;
-    }
-
-    public SpeedMode getSpeedMode() {
-        return mSpeedMode;
     }
 
     public void setAudioPath(String audioPath) {

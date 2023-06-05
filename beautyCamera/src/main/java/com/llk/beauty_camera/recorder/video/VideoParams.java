@@ -2,8 +2,6 @@ package com.llk.beauty_camera.recorder.video;
 
 import android.opengl.EGLContext;
 
-import com.llk.beauty_camera.recorder.SpeedMode;
-
 /**
  * 视频参数
  * @author CainHuang
@@ -38,13 +36,11 @@ public class VideoParams {
     private int mVideoHeight;
     private int mBitRate;
     private String mVideoPath;
-    private SpeedMode mSpeedMode;
     private long mMaxDuration; // us
     private EGLContext mEglContext;
 
     public VideoParams() {
         mBitRate = BIT_RATE;
-        mSpeedMode = SpeedMode.MODE_NORMAL;
     }
 
     @Override
@@ -96,15 +92,6 @@ public class VideoParams {
 
     public int getBitRate() {
         return mBitRate;
-    }
-
-    public VideoParams setSpeedMode(SpeedMode mode) {
-        this.mSpeedMode = mode;
-        return this;
-    }
-
-    public SpeedMode getSpeedMode() {
-        return mSpeedMode;
     }
 
     public VideoParams setMaxDuration(long maxDuration) {

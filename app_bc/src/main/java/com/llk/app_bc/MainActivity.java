@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCameraRecording(long duration) {
+            public void onCameraRecording(float progress) {
 
             }
 

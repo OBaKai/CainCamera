@@ -3,8 +3,6 @@ package com.llk.beauty_camera;
 import android.graphics.SurfaceTexture;
 import android.opengl.EGLContext;
 
-import com.llk.beauty_camera.recorder.SpeedMode;
-
 /**
  * author: llk
  * date  : 2023/6/4
@@ -91,12 +89,6 @@ public abstract class BaseBeautyCameraComponent extends IBaseComponentlifecycle 
      * @param seconds 录制视频时长(秒)
      */
     public abstract void setRecordSeconds(int seconds);
-
-    /**
-     * 设置速度模式
-     * @param mode 设置录制的速度模式
-     */
-    public abstract void setSpeedMode(SpeedMode mode);
 
     /**
      * 是否打开闪光灯

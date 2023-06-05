@@ -77,7 +77,7 @@ public final class AudioRecorder implements Runnable {
             mAudioEncoder.release();
         }
 
-        float speed = params.getSpeedMode().getSpeed();
+        float speed = 1.0f;
         try {
             minBufferSize = (int)(params.getSampleRate() * 4 * 0.02);
             if (mBufferSize < minBufferSize / speed * 2) {

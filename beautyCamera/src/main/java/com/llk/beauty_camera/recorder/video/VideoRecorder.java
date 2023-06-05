@@ -15,7 +15,6 @@ import com.llk.beauty_camera.filter.utils.TextureRotationUtils;
 import com.llk.beauty_camera.recorder.MediaType;
 import com.llk.beauty_camera.recorder.OnRecordListener;
 import com.llk.beauty_camera.recorder.RecordInfo;
-import com.llk.beauty_camera.recorder.SpeedMode;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -304,19 +303,7 @@ public final class VideoRecorder implements Runnable, VideoEncoder.OnEncodingLis
         if (mVideoEncoder == null) {
             return;
         }
-        SpeedMode mode = mVideoEncoder.getVideoParams().getSpeedMode();
-        // 快速录制的时候，需要做丢帧处理
-        if (mode == SpeedMode.MODE_FAST || mode == SpeedMode.MODE_EXTRA_FAST) {
-            int interval = 2;
-            if (mode == SpeedMode.MODE_EXTRA_FAST) {
-                interval = 3;
-            }
-            if (mDrawFrameIndex % interval == 0) {
-                drawFrame(texture, timestampNanos);
-            }
-        } else {
-            drawFrame(texture, timestampNanos);
-        }
+        drawFrame(texture, timestampNanos);
         mDrawFrameIndex++;
     }
 
@@ -336,18 +323,8 @@ public final class VideoRecorder implements Runnable, VideoEncoder.OnEncodingLis
 
     /**
      * 计算时间戳
-     * @return
      */
     private long getPTS(long timestampNanos) {
-        SpeedMode mode = mVideoEncoder.getVideoParams().getSpeedMode();
-        if (mode == SpeedMode.MODE_NORMAL) { // 正常录制的时候，使用SurfaceTexture传递过来的时间戳
-            return timestampNanos;
-        } else { // 倍速状态下，需要根据帧间间隔来算实际的时间戳
-            long time = System.nanoTime();
-            if (mFirstTime <= 0) {
-                mFirstTime = time;
-            }
-            return (long) (mFirstTime + (time - mFirstTime) / mode.getSpeed());
-        }
+        return timestampNanos;
     }
 }
