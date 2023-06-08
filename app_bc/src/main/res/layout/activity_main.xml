@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.llk.beauty_camera.CameraTextureView
+    <TextureView
         android:id="@+id/ctv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

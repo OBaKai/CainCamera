@@ -10,11 +10,11 @@ android {
         consumerProguardFiles "consumer-rules.pro"
 
         externalNativeBuild {
-            cmake {
-                cppFlags "-std=c++11", "-D__STDC_CONSTANT_MACROS"
-                arguments "-DANDROID_PLATFORM_LEVEL=${platformVersion}",
-                        '-DANDROID_TOOLCHAIN=clang'
-            }
+//            cmake {
+//                cppFlags "-std=c++11", "-D__STDC_CONSTANT_MACROS"
+//                arguments "-DANDROID_PLATFORM_LEVEL=${platformVersion}",
+//                        '-DANDROID_TOOLCHAIN=clang'
+//            }
             ndk {
                 abiFilters "armeabi-v7a", "arm64-v8a"
             }
@@ -31,19 +31,18 @@ android {
     sourceSets.main {
         jniLibs.srcDir "src/main/jniLibs"
         jni.srcDirs = []
-        resources.srcDir "src/main/shell"
     }
 
-    externalNativeBuild {
-        cmake {
-            path "src/main/cpp/CMakeLists.txt"
-        }
-    }
+//    externalNativeBuild {
+//        cmake {
+//            path "src/main/cpp/CMakeLists.txt"
+//        }
+//    }
 
-    packagingOptions {
-        pickFirst 'lib/arm64-v8a/libffmpeg.so'
-        pickFirst 'lib/armeabi-v7a/libffmpeg.so'
-    }
+//    packagingOptions {
+//        pickFirst 'lib/arm64-v8a/libffmpeg.so'
+//        pickFirst 'lib/armeabi-v7a/libffmpeg.so'
+//    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

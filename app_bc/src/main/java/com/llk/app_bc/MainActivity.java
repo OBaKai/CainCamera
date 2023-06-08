@@ -11,7 +11,6 @@ import android.view.TextureView;
 import android.widget.Toast;
 
 import com.llk.beauty_camera.BeautyCameraManager;
-import com.llk.beauty_camera.CameraTextureView;
 import com.llk.beauty_camera.recorder.MediaInfo;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             manager.stopRecord();
         });
 
-        CameraTextureView textureView = findViewById(R.id.ctv);
+        TextureView textureView = findViewById(R.id.ctv);
         textureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
             @Override
             public void onSurfaceTextureAvailable(@NonNull SurfaceTexture surface, int width, int height) {

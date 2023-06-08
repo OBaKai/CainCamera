@@ -32,7 +32,7 @@ import com.llk.beauty_camera.utils.FileTools;
 public class BeautyCameraManager extends BaseBeautyCameraComponent {
 
     private static final String TAG = BeautyCameraManager.class.getSimpleName();
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = BuildConfig.DEBUG;
 
     private static final String OUTPUT_MEDIA_FILE_PREFIX = "bc_media_";
     private static final String VIDEO_FILE_SUFFIX = ".mp4";
