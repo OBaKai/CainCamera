@@ -68,10 +68,6 @@ public class BeautyCameraManager extends BaseBeautyCameraComponent {
 //
 //    };
 
-//    private final OnFpsListener mOnFpsListener = fps -> { //fps帧率值回调
-//
-//    };
-
     //录制与合成，相关回调
     private final OnRecordStateListener mOnRecordStateListener = new OnRecordStateListener() {
         @Override
@@ -172,10 +168,6 @@ public class BeautyCameraManager extends BaseBeautyCameraComponent {
             mCameraController = new CameraController(context);
         }
         mCameraController.setPreviewCallback(data -> { //相机预览数据回调
-            if (DEBUG){
-                Log.d(TAG, "onPreviewFrame: width - " + mCameraController.getPreviewWidth()
-                        + ", height - " + mCameraController.getPreviewHeight());
-            }
             mCameraRenderer.requestRender();
         });
 
@@ -188,8 +180,6 @@ public class BeautyCameraManager extends BaseBeautyCameraComponent {
             }
             mCameraRenderer.bindInputSurfaceTexture(surfaceTexture);
         });
-
-        //mCameraController.setOnFrameAvailableListener(mOnFrameAvailableListener); //SurfaceTexture帧可用回调
 
         if (BrightnessUtils.getSystemBrightnessMode(context) == 1) {
             mCameraParam.brightness = -1;
@@ -212,7 +202,6 @@ public class BeautyCameraManager extends BaseBeautyCameraComponent {
         super.onResume();
         openCamera();
 //        mCameraParam.captureCallback = mOnCaptureListener;
-//        mCameraParam.fpsCallback = mOnFpsListener;
     }
 
     @Override
@@ -221,7 +210,6 @@ public class BeautyCameraManager extends BaseBeautyCameraComponent {
         mCameraRenderer.onPause();
         closeCamera();
 //        mCameraParam.captureCallback = null;
-//        mCameraParam.fpsCallback = null;
     }
 
     @Override
