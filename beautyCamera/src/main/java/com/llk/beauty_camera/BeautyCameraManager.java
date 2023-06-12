@@ -104,7 +104,7 @@ public class BeautyCameraManager extends BaseBeautyCameraComponent {
             if (mMediaRecorder.enableAudio()) { //音频与视频融合
                 final String currentFile = FileTools.makeFilePath(mContext, OUTPUT_MEDIA_FILE_PREFIX + System.currentTimeMillis() + VIDEO_FILE_SUFFIX);
                 FileTools.createFile(currentFile);
-                mCommandEditor.execCommand(MediaCommandEditor.mergeAudioVideo(mVideoInfo.getFileName(), mAudioInfo.getFileName(), currentFile), (result) -> {
+                mCommandEditor.execMuxer(currentFile, mVideoInfo.getFileName(), mAudioInfo.getFileName(), (result) -> {
                             if (result == 0) { //合成成功
                                 MediaInfo mediaInfo = new MediaInfo(currentFile, mVideoInfo.getDuration());
                                 if (cameraStateCallback != null){
